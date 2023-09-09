@@ -1,17 +1,29 @@
 .card-1 {
   border-top: 5px solid #ff4f64;
+  width: 40%;
+  background-color: #ffffff;
+  margin: 10px;
 }
 
 .card-2 {
   border-top: 5px solid #00a8e7;
+  width: 40%;
+  background-color: #ffffff;
+  margin: 10px;
 }
 
 .card-3 {
   border-top: 5px solid #44c4a1;
+  width: 40%;
+  margin: 10px;
+  background-color: #ffffff;
 }
 
 .card-4 {
   border-top: 5px solid #fcc200;
+  width: 40%;
+  margin: 10px;
+  background-color: #ffffff;
 }
 
 /* Write CSS code here. */
@@ -22,4 +34,37 @@
 
 .cards {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none;
+}
+
+.card-11 {
+  text-align: right;
+}
+.card-21 {
+  text-align: right;
+}
+
+.card-31 {
+  text-align: right;
+}
+
+.card-41 {
+  text-align: right;
+}
+
+.container {
+  background-color: #f4faff;
+}
+
+.para {
+  text-align: center;
+}
+
+@media screen and (min-height: 991px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+  }
 }

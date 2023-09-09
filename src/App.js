@@ -44,18 +44,18 @@ const cardDetails = {
   className: 'card-1',
 }
 const App = () => (
-  <div>
+  <div className="container">
     <h1 className="mainHead">Learn 4.0 Technologies</h1>
-    <p>
+    <p className="para">
       Get trained by alumni of IITs and top companies like
       Amazon,Microsoft,Intel,Nvidia,Qualcomm,etc.Leartn directly from
       professionals involved in project Development
     </p>
-    <div className="cards">
+    <ul className="cards">
       {cardsList.map(i => (
-        <CardItem cardDetails={i} key={i.id} />
+        <CardItem cardDetails={i} key={i.className} />
       ))}
-    </div>
+    </ul>
   </div>
 )
 
