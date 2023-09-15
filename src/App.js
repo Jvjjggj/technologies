@@ -1,62 +1,82 @@
+import {Component} from 'react'
+import UserProfile from './components/UserProfile'
+
 import './App.css'
-import CardItem from './components/CardItem/index'
-const cardsList = [
+
+const initialUserDetailsList = [
   {
-    id: 1,
-    title: 'Data Scientist',
-    description:
-      'Data scientists gather and analyze large sets of structured and unstructured data',
-    imgUrl: 'https://assets.ccbp.in/frontend/react-js/data-scientist-img.png',
-    className: 'card-1',
+    uniqueNo: 1,
+    imageUrl: 'https://assets.ccbp.in/frontend/react-js/esther-howard-img.png',
+    name: 'Esther Howard',
+    role: 'Software Developer'
   },
   {
-    id: 2,
-    title: 'IOT Developer',
-    description:
-      'IoT Developers are professionals who can develop, manage, and monitor IoT devices.',
-    imgUrl: 'https://assets.ccbp.in/frontend/react-js/iot-developer-img.png',
-    className: 'card-2',
+    uniqueNo: 2,
+    imageUrl: 'https://assets.ccbp.in/frontend/react-js/floyd-miles-img.png',
+    name: 'Floyd Miles',
+    role: 'Software Developer'
   },
   {
-    id: 3,
-    title: 'VR Developer',
-    description:
-      'A VR developer creates completely new digital environments that people can see.',
-    imgUrl: 'https://assets.ccbp.in/frontend/react-js/vr-developer-img.png',
-    className: 'card-3',
+    uniqueNo: 3,
+    imageUrl: 'https://assets.ccbp.in/frontend/react-js/jacob-jones-img.png',
+    name: 'Jacob Jones',
+    role: 'Software Developer'
   },
   {
-    id: 4,
-    title: 'ML Engineer',
-    description:
-      'Machine learning engineers feed data into models defined by data scientists.',
-    imgUrl: 'https://assets.ccbp.in/frontend/react-js/ml-engineer-img.png',
-    className: 'card-4',
-  },
+    uniqueNo: 4,
+    imageUrl: 'https://assets.ccbp.in/frontend/react-js/devon-lane-img.png',
+    name: 'Devon Lane',
+    role: 'Software Developer'
+  }
 ]
 
-const cardDetails = {
-  id: 1,
-  title: 'Data Scientist',
-  description:
-    'Data scientists gather and analyze large sets of structured and unstructured data',
-  imgUrl: 'https://assets.ccbp.in/frontend/react-js/data-scientist-img.png',
-  className: 'card-1',
+class App extends Component {
+  state = {
+    searchInput: '',
+    usersDetailsList: initialUserDetailsList
+  }
+
+  onChangeSearchInput = event => {
+    this.setState({
+      searchInput: event.target.value
+    })
+  }
+
+  deleteUser = uniqueNo => {
+    const {usersDetailsList} = this.state
+    const filteredUsersData = usersDetailsList.filter(
+      each => each.uniqueNo !== uniqueNo
+    )
+    this.setState({
+      usersDetailsList: filteredUsersData
+    })
+  }
+
+  render() {
+    const {searchInput, usersDetailsList} = this.state
+    const searchResults = usersDetailsList.filter(eachUser =>
+      eachUser.name.includes(searchInput)
+    )
+    return (
+      <div className="app-container">
+        <h1 className="title">Users List</h1>
+        <input
+          type="search"
+          onChange={this.onChangeSearchInput}
+          value={searchInput}
+        />
+        <ul className="list-container">
+          {searchResults.map(eachUser => (
+            <UserProfile
+              userDetails={eachUser}
+              key={eachUser.uniqueNo}
+              deleteUser={this.deleteUser}
+            />
+          ))}
+        </ul>
+      </div>
+    )
+  }
 }
-const App = () => (
-  <div className="container">
-    <h1 className="mainHead">Learn 4.0 Technologies</h1>
-    <p className="para">
-      Get trained by alumni of IITs and top companies like
-      Amazon,Microsoft,Intel,Nvidia,Qualcomm,etc.Leartn directly from
-      professionals involved in project Development
-    </p>
-    <ul className="cards">
-      {cardsList.map(i => (
-        <CardItem cardDetails={i} key={i.className} />
-      ))}
-    </ul>
-  </div>
-)
 
 export default App
